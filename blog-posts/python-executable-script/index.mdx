@@ -1,0 +1,96 @@
+---
+title: Creating executable files from python script
+thumbnail: "/assets/images/python.png"
+date: April 10, 2022
+---
+
+We usually see that Go developers building an executable (.exe) apps and
+Python scripts are run on IDEs. It is always better for users when they can run
+your application without installing anything. In Python ecosystem, there are various ways of doing so.
+There are 2 main approaches I personall use and like.
+
+**PyInstaller**
+
+PyInstaller gives you the ability to create a folder or executable that users can immediately run without any extra installation. To fully appreciate PyInstaller’s power,
+it’s useful to revisit some of the distribution problems PyInstaller helps you avoid.
+Let's Think about what you typically go through when setting up a new machine for Python
+development either at work or for personal use. It probably goes something like this:
+
+- `Download and install a specific version of Python`
+- `Set up pip`
+- `Set up a virtual environment`
+- `Getting a copy of the script/code`
+- `Installing the dependancies`
+
+It probably does not make sense for users if they are not python developer. There has to be a bettery of sharing the applications you build to users without any hassle.
+`PyInstaller` abstracts these details from the user by finding all your dependencies and bundling them together. Your users won’t even know they’re running a Python project because the Python Interpreter itself is bundled into your application.
+Goodbye complicated installation instructions!
+In order to use the `PyInstaller`, follow these steps:
+
+1. First of all, install `Pyinstaller` using `pip` or any other package manager.
+
+```python
+# For Python 2.xx version
+pip install pyinstaller
+
+# For Python 3.xx version
+pip3 install pyinstaller
+```
+
+2. Navigate to the location of the script where it is stored. For illustration purposes, I created a simple Python script that will display 'Hello World!' when clicking the button.
+
+```python
+import tkinter as tk
+
+root = tk.Tk()
+
+tkCanvas = tk.Canvas(root, width=300, height=300)
+tkCanvas.pack()
+
+def hello():
+    tkLabel = tk.Label(root, text='Hello World!', fg='green',
+                       font=('helvetica', 12, 'bold'))
+    tkCanvas.create_window(150, 200, window=tkLabel)
+
+tkButton = tk.Button(text='Click Me', command=hello, bg='brown', fg='white')
+tkCanvas.create_window(150, 150, window=tkButton)
+
+root.mainloop()
+```
+
+3. Most importantly, once you are on the same path where you have the sample python script (for example hello.py), Use the below command and you will get the python exe file under the dist folder on the same location.
+
+```python
+# sample python file is hello.py
+pyinstaller --onefile hello.py
+```
+
+**Compile a Python script to .exe using auto-py-to-exe (GUI Tool)**
+
+Using this GUI (Graphical User Interface) tool, you can easily build python to exe in a few steps:
+
+1. Firstly, install the auto-py-to-exe using pip or some other package manager.
+
+```python
+# For Python 2.xx version
+pip install auto-py-to-exe
+
+# For Python 3.xx version
+pip3 install auto-py-to-exe
+```
+
+2. Start this `auto-py-to-exe`, by entering `auto-py-to-exe` in the cmd or terminal of the IDE you are using.
+
+```python
+auto-py-to-exe
+```
+
+3. Once the application is started, you need to select the python script path into script location field.
+
+![autopytoexe window](/assets/images/blog-posts/pyautogui.png)
+
+4. At this stage, you need to choose if you need the exe file as `one directory` or as `one file`. Here if you so many python files dependencies for the application, you need to choose the main python file. If you choose `one directory` as an option you will get exe in the output folder `path is user-configurable` with dependencies file. If you opt `one file option`, your all code dependencies will be in one exe file. Once you are ready, simply click on `convert` button and that is it.
+
+**Conclusion**
+
+I hope the above solutions on compilation must be enough for the problem statement. Well, most of the things in this article is self explanatory. But if you need some other help related to the same subject, please write back to me with any questions, I'm always happy to help 😊.

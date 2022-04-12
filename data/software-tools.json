@@ -1,0 +1,53 @@
+{
+  "tools": [
+        {
+      "title": "Visual Studio Code",
+      "description": "VSC is a go-to when it comes to web development.",
+      "url": "https://code.visualstudio.com/",
+      "image": "/assets/images/vscode.png",
+      "category": "development"
+    },
+    {
+      "title": "XCode",
+      "description": "XCode is my number one iPhone simulator.",
+      "url": "https://developer.apple.com/xcode/",
+      "image": "/assets/images/xcode.png",
+      "category": "development"
+    },
+    {
+      "title": "Tableau",
+      "description": "A tool that helps make Big Data small, and small data insightful and actionable.",
+      "url": "https://www.tableau.com/",
+      "image": "/assets/images/tableau.png",
+      "category": "development"
+    },
+    {
+      "title": "Automation Anywhere",
+      "description": "I have been using AA to create bots to take over boring tasks.",
+      "url": "https://www.automationanywhere.com/",
+      "image": "/assets/images/automation.png",
+      "category": "development"
+    },
+    {
+      "title": "Figma",
+      "description": "My #1 design tool. I do all my UI design in Figma.",
+      "url": "https://figma.com/",
+      "image": "/assets/images/figma.png",
+      "category": "design"
+    },
+    {
+      "title": "Sketch",
+      "description": "This is another coolest design tool.",
+      "url": "https://www.sketch.com/",
+      "image": "/assets/images/sketch.png",
+      "category": "design"
+    },
+    {
+      "title": "Adobe XD",
+      "description": "Adobe XD delivers time-saving features and workflows to help you focus on creating.",
+      "url": "https://www.adobe.com/products/xd.html",
+      "image": "/assets/images/adobe-xd.png",
+      "category": "design"
+    }
+  ]
+}

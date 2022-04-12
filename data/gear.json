@@ -1,0 +1,60 @@
+{
+  "gear": [
+    {
+      "title": "MacBook Pro 16 M1 Pro Chip",
+      "description": "Apple M1 Pro with 10-core CPU, 16-core GPU, 16-core Neural Engine.",
+      "url": "https://www.apple.com/shop/buy-mac/macbook-pro/16-inch-space-gray-10-core-cpu-16-core-gpu-512gb",
+      "image": "/assets/images/macbookprom116.png",
+      "category": "computing"
+    },
+    {
+      "title": "MacBook Pro 13 M1 Chip",
+      "description": "Apple M1 chip with 8‑core CPU, 8‑core GPU, and 16‑core Neural Engine.",
+      "url": "https://www.apple.com/shop/buy-mac/macbook-pro/13-inch-space-gray-apple-m1-chip-with-8-core-cpu-and-8-core-gpu-512gb",
+      "image": "/assets/images/macbookprom1.png",
+      "category": "computing"
+    },
+    {
+      "title": "Keychron K6 Wireless Mechanical Keyboard",
+      "description": "This is a compact yet powerful keyboard that I love using.",
+      "url": "https://www.keychron.com/products/keychron-k6-wireless-mechanical-keyboard",
+      "image": "/assets/images/keychron.png",
+      "category": "accessory"
+    },
+    {
+      "title": "LG 34 Ultrawide Ergonomic QHD Monitor",
+      "description": "This monitor allows me to do more on a single screen with better cable management and ergonomic stand.",
+      "url": "https://www.lg.com/uk/monitors/lg-34wn750",
+      "image": "/assets/images/lgmonitor.png",
+      "category": "accessory"
+    },
+    {
+      "title": "Sit and Stand Desk",
+      "description": "One of my favourite stand and sit desks from IKEA.",
+      "url": "https://www.ikea.com/gb/en/p/bekant-desk-sit-stand-white-s99061198/",
+      "image": "/assets/images/ikeadesk.png",
+      "category": "accessory"
+    },
+    {
+      "title": "DJI Mavic Air 2S",
+      "description": "Today, I am more focused on improving my drone skills with this beast.",
+      "url": "https://www.dji.com/pl/air-2s?site=brandsite&from=nav",
+      "image": "/assets/images/djimavic.png",
+      "category": "photography"
+    },
+    {
+      "title": "Canon EOS 90D",
+      "description": "This camera allows me to exercise my hobby when I am not coding.",
+      "url": "https://www.usa.canon.com/internet/portal/us/home/products/details/cameras/eos-dslr-and-mirrorless-cameras/dslr/eos-90d-body",
+      "image": "/assets/images/canon90d.png",
+      "category": "photography"
+    },
+    {
+      "title": "Pgytech Air 2S ND-PL Filter",
+      "description": "The Hybrid ND-PL filter prevents unwanted reflections. It also saturates colors and improves image sharpness to create more vivid photos.",
+      "url": "https://www.pgytech.com/products/dji-air-2s-filter",
+      "image": "/assets/images/ndplair2s.png",
+      "category": "photography"
+    }
+  ]
+}

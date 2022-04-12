@@ -1,0 +1,107 @@
+---
+title: Introduction to Python and installations
+thumbnail: "/assets/images/python.png"
+date: April 12, 2022
+---
+
+Python is one of the fastest growing programming languages. It is becoming so much popular and being used in everywhere, from healthcare to the self-driving cars.
+Python is superior in a wide variety of cases such as – `Shell scripting`, `task automation`, and `Web development` are just some basic examples of Python usage.
+We usually work with lots of data at work nowadays, Python is the language of choice for big data analysis and machine learning, but it can be used to create applications or even games.
+Nowadays, lots of people are learning Python because of its unique position, simplicity, expressive and quite straightforward.
+The `ecosystem` of Python is very big and you can find a library for almost everything.
+
+**How to install Python?**
+
+In order to install Python, first download the latest version or specific release from the website (https://www.python.org/downloads/) based on your operating system. Please make sure to download the appropriate version of Python for your operating system.
+![Python downloads window](/assets/images/blog-posts/python-download.png)
+Once the package is download, simply follow the installation instructions shown on the installation window:
+
+Click that, and run the installer:
+![Python installation](/assets/images/blog-posts/python-install-one.png)
+
+Click “Continue”:
+![Python installation](/assets/images/blog-posts/python-install-two.png)
+
+Then click “Continue” again. A new panel will appear with an interesting recap on the history of Python and its governance:
+![Python installation](/assets/images/blog-posts/python-install-three.png)
+
+Agree to the license:
+![Python installation](/assets/images/blog-posts/python-install-four.png)
+
+And move to the installation phase and simple click close once finished:
+![Python installation](/assets/images/blog-posts/python-install-five.png)
+
+Follow the below guide on how to finish the installation
+
+**macOS**
+
+When it’s finally installed, Python is installed as /usr/bin/python3
+
+> If you have Xcode installed on your machine, this will overwrite the old version that Xcode installed.
+
+Running python3 in the macOS terminal opens the Python 3.9 interpreter we just installed:
+![Python installation](/assets/images/blog-posts/python-terminal.png)
+
+You will now also find a new folder under “/Applications/Python 3.9” (change that with your exact version number, for example, if it is 3.7 then it is 3.7), with some files:
+![Python installation](/assets/images/blog-posts/python-folder.png)
+
+As the instructions mentioned in the last installation panel, you need to run the “Install Certificates.command” to install the SSL certificates needed by Python.
+Double-click on Install Certificates to run it, and it will to its job quickly:
+![Python installation](/assets/images/blog-posts/python-certificate.png)
+
+Remember to not be confused by having the python command on your system that points to the old Python 2. It might be a source of problems or old versions may be retired already.
+It is recommended having a shell alias to execute python3 each time you run python.
+With the Fish shell, you can run:
+
+```shell
+alias python "python3"
+alias pip "pip3"
+funcsave python
+funcsave pip
+```
+
+directly in the terminal and also, make sure the pip binaries are in your shell path, to run them easily:
+
+```shell
+#(change 3.9 with your current version)
+set PATH ~/Library/Python/3.9/bin $PATH
+```
+
+With Zsh, you should add the alias to the .zshrc file in your home folder:
+
+```shell
+alias python="python3"
+```
+
+With Bash, you should add the alias to the .bashrc file in your home folder:
+
+```shell
+alias python="python3"
+```
+
+Finally, you can run python and it will point to the Python 3 version you just installed.
+I found that the easiest way to run `pip` (the Python package manager) is to use `python -m pip <COMMAND>` rather than `pip <COMMAND>`, for instance in the example below:
+
+```shell
+python -m pip install pandas
+```
+
+**Windows**
+
+Go to the Start and search for `Edit environment variables for your account` and click on it, then the dialog window opens up. Add Python and Scripts path to the `PATH`:
+`C:\Program Files\Python\Python39;` (change 39 with your current version)
+`C:\Program Files\Python\Python39\Scripts;`
+![Python variables](/assets/images/blog-posts/python-variables-window.png)
+
+In order to configure the pip, create an `.ini` file in the directory `C:\Users\[username]\pip\pip.ini`
+You can test the environment by the following and check the pip library downloading:
+
+```shell
+mkdir projectname
+cd projectname
+python -m venv venv
+venv\scripts\activate
+
+#once above is done, please try to check if pip is working
+pip install pandas
+```

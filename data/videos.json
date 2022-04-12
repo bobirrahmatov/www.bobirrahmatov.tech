@@ -1,0 +1,14 @@
+{
+  "videos": [
+    {
+      "title": "React card payment demo",
+      "description": "This is a demo for react card payment form on react, it has an awesome UI. The card payment form mapped to the majority of the cards issues in the world.",
+      "url": "https://www.youtube.com/watch?v=eb3AXv6BeaU"
+    },
+    {
+      "title": "How to deploy Nextjs .env variables to Vercel?",
+      "description": "Demo to deploy .env variables to Vercel on Nextjs, which means when the serverless API functions are run, these env variables in runtime are secret.",
+      "url": "https://www.youtube.com/watch?v=tuejlMuRbEc&ab_channel=bobirrahmatov"
+    }
+  ]
+}
