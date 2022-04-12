@@ -1,5 +1,5 @@
 ---
-title: Introduction to Python and installations
+title: Introduction to python and installations
 thumbnail: "/assets/images/python.png"
 date: April 12, 2022
 ---
@@ -40,13 +40,16 @@ When it’s finally installed, Python is installed as /usr/bin/python3
 > If you have Xcode installed on your machine, this will overwrite the old version that Xcode installed.
 
 Running python3 in the macOS terminal opens the Python 3.9 interpreter we just installed:
+
 ![Python installation](/assets/images/blog-posts/python-terminal.png)
 
 You will now also find a new folder under “/Applications/Python 3.9” (change that with your exact version number, for example, if it is 3.7 then it is 3.7), with some files:
+
 ![Python installation](/assets/images/blog-posts/python-folder.png)
 
 As the instructions mentioned in the last installation panel, you need to run the “Install Certificates.command” to install the SSL certificates needed by Python.
 Double-click on Install Certificates to run it, and it will to its job quickly:
+
 ![Python installation](/assets/images/blog-posts/python-certificate.png)
 
 Remember to not be confused by having the python command on your system that points to the old Python 2. It might be a source of problems or old versions may be retired already.
@@ -91,6 +94,7 @@ python -m pip install pandas
 Go to the Start and search for `Edit environment variables for your account` and click on it, then the dialog window opens up. Add Python and Scripts path to the `PATH`:
 `C:\Program Files\Python\Python39;` (change 39 with your current version)
 `C:\Program Files\Python\Python39\Scripts;`
+
 ![Python variables](/assets/images/blog-posts/python-variables-window.png)
 
 In order to configure the pip, create an `.ini` file in the directory `C:\Users\[username]\pip\pip.ini`
@@ -105,3 +109,5 @@ venv\scripts\activate
 #once above is done, please try to check if pip is working
 pip install pandas
 ```
+
+That's how you can get started with Python and installed it on your machine.
