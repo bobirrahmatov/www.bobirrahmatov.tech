@@ -4,7 +4,7 @@ thumbnail: "/assets/images/js.png"
 date: February 26, 2022
 ---
 
-JavaScript is a text-based programming language that is used both on the client-side and server-side that allows you to make web pages interactive. Where HTML and CSS are languages that give general structure and style to web pages, JavaScript gives web pages interactive elements that engage a user. For example, a search box on the Amazon's website or refreshing your Facebook's feeds. Every programming language has it own conventions and style guides. JavaScript has also some coding standards and conventions. Creating large programs and software code becomes too messy and unmaintainable if coding standards and conventions of the programming language are not followed, especially if there are multiple people working on the same project. It is always easier to maintain the code when coding and styling guidance is followed.
+JavaScript is a text-based programming language that is used both on the client-side and server-side that allows you to make web pages interactive. Where HTML and CSS are languages that give general structure and style to web pages, JavaScript gives web pages interactive elements that engage a user. For example, a search box on Amazon's website or refreshing your Facebook feeds. Every programming language has its conventions and style guides. JavaScript has also some coding standards and conventions. Creating large programs and software code becomes too messy and unmaintainable if coding standards and conventions of the programming language are not followed, especially if multiple people are working on the same project. It is always easier to maintain the code when coding and styling guidance is followed.
 
 **So what are style & coding conventions?**
 
@@ -34,7 +34,7 @@ if (num === 1) {
 }
 ```
 
-Multiline imports should be indented just like multiline array and object literals.eslint: [object-curly-newline](https://eslint.org/docs/rules/object-curly-newline)
+Multiline imports should be indented just like a multiline array and object literals.eslint: [object-curly-newline](https://eslint.org/docs/rules/object-curly-newline)
 
 ```javascript
 // bad
@@ -51,7 +51,7 @@ import { longNameA, longNameB, longNameC, longNameD, longNameE } from "./src";
 Blank spaces should always be used in the following circumstances:
 
 - A keyword followed by `‘‘` or `‘’` must provide whitespaces before and after it.
-- All keywords like `‘function’`, `‘typeof’` etc needs extra attention for whitespaces & a space provided after it.
+- All keywords like `‘function’`, `‘type of’` etc need extra attention for whitespaces & a space provided after it.
 
 ```javascript
 let integer = function (value, default_value) {
@@ -60,7 +60,7 @@ let integer = function (value, default_value) {
 };
 ```
 
-Use line breaks after open and before close `array brackets` if an array has multiple lines:
+Use line breaks after opening and before closing `array brackets` if an array has multiple lines:
 
 ```javascript
 // bad
@@ -184,7 +184,7 @@ const objectName = {
 
 **Blank lines are not harmful**
 
-Using blank lines to separate unrelated lines of code. It improves readability and understanding the code. I always try to keep the code length less than `80 characters` at one line. If a JavaScript statement does not fit on one line, the best place to break it, is after an operator or a comma.
+Using blank lines to separate unrelated lines of code. It improves readability and understanding of the code. I always try to keep the code length less than `80 characters` in one line. If a JavaScript statement does not fit on one line, the best place to break it is after an operator or a comma.
 
 Without blank lines:
 
@@ -216,7 +216,7 @@ if (num === 1) {
 
 **Naming convention & CamelCase**
 
-ECMAScript uses camelCase convention. You should too when naming Variables and Functions. And try to use meaningful names for those variables and functions and keep them short. On the other hand, use PascalCase only when naming constructors or classes.
+ECMAScript uses the camelCase convention. You should too when naming Variables and Functions. And try to use meaningful names for those variables and functions and keep them short. On the other hand, use PascalCase only when naming constructors or classes.
 
 PascalCase:
 
@@ -260,10 +260,10 @@ function thisIsMyFunction() {}
 In Javascript, all we do is make functions in the form of callbacks and events. Author of [Maintainable Javascript](https://www.oreilly.com/library/view/maintainable-javascript/9781449328092/) Nicholas Zakas introduces some common conventions for functions. I find this helpful:
 
 - can Function that returns a boolean
-- has Function that returns a boolean
-- is a Function that returns a boolean
-- get Function that returns a non boolean
-- set Function that is used to save a value
+- has a function that returns a boolean
+- is a function that returns a boolean
+- get a function that returns a non-boolean
+- the set function that is used to save a value
 
 **Classes & Constructors**
 
@@ -271,7 +271,7 @@ Constructors are functions too and are used to create objects via a new operator
 
 It is helpful since JavaScript uses the same for naming pre-defined constructors.
 
-Always use `class`. Avoid manipulating prototype directly.
+Always use `class`. Avoid manipulating the prototype directly.
 
 > Why? class syntax is more concise and easier to reason about.
 
@@ -344,4 +344,4 @@ function make(tag) {
 
 **Conclusion**
 
-Having consistent formatting and styling across your code can save a lot of time, especially when collaborating with other developers. I know this can be stresfull, therefore, there is an alternative that works for me most of the time, is the [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) package that I use in the text editor [VS Code](https://code.visualstudio.com/). I hope you enjoyed reading this post.
+Having consistent formatting and styling across your code can save a lot of time, especially when collaborating with other developers. I know this can be stressful, that's why there is an alternative that works for me most of the time [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) package that I use in the text editor [VS Code](https://code.visualstudio.com/). I hope you enjoyed reading this post.
