@@ -1,0 +1,339 @@
+---
+title: Python basics
+thumbnail: "/assets/images/python.png"
+date: April 13, 2022
+---
+
+**Python keywords**
+As in every programming language, there are some `keywords` (predefined and reserved words) and `identifiers` (names given to variables, functions, etc.) in Python. `Keywords` are reserved words and they have a special meaning in Python. We cannot use a keyword as a variable name, function name, or any other identifier. They are used to describe the syntax of the coding and structure of the Python language. Currently, there are 33 keywords in Python 3.7. This can vary depending on the release.
+
+> All the keywords in python are written in lower case except `None`, `True`, and `False`.
+
+| Number | Keyword  | Description                                                                                                                                                  |
+| ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 1      | and      | Logical operator it returns true if both the operands are true else return false                                                                             |
+| 2      | or       | Logical operator it returns true if anyone operand is true else return false                                                                                 |
+| 3      | not      | Logical operator it returns True if the operand is false else return false                                                                                   |
+| 4      | if       | This is used to make a conditional statement                                                                                                                 |
+| 5      | elif     | Condition statement used with if statement the elif statement is executed if the previous conditions were not true                                           |
+| 6      | yield    | It ends a function and returns a generator                                                                                                                   |
+| 7      | raise    | This raises an exception                                                                                                                                     |
+| 8      | nonlocal | It’s declared a non-local variable                                                                                                                           |
+| 9      | None     | This is a special constant used to denote a null value or avoid. It’s important to remember, 0, any empty container(e.g empty list) does not compute to None |
+| 10     | is       | This is used to check if the two variables are equal or not                                                                                                  |
+| 11     | in       | It’s used to check if a value is present in a list, tuple, etc, or not                                                                                       |
+| 12     | import   | This is used to import a module                                                                                                                              |
+| 13     | global   | This declares a global variable                                                                                                                              |
+| 14     | from     | The form is used to import specific parts of any module.                                                                                                     |
+| 15     | finally  | Finally is used with exceptions, a block of code that will be executed no matter if there is an exception or not                                             |
+| 16     | except   | Used with exceptions, what to do when an exception occurs                                                                                                    |
+| 17     | del      | It deletes a reference to an object                                                                                                                          |
+| 18     | continue | It continues to the next iteration of a loop                                                                                                                 |
+| 19     | class    | It helps us to define a class                                                                                                                                |
+| 20     | assert   | This function is used for debugging purposes. Usually used to check the correctness of code                                                                  |
+| 21     | with     | The with keyword is used to simplify exception handling                                                                                                      |
+| 22     | try      | It makes a try-except statement                                                                                                                              |
+| 23     | False    | This is also a boolean value                                                                                                                                 |
+| 24     | True     | This is a boolean value                                                                                                                                      |
+| 25     | return   | It will return a value and exit the function                                                                                                                 |
+| 26     | pass     | This is a null statement that means it will do nothing                                                                                                       |
+| 27     | lambda   | It is used to define the anonymous function                                                                                                                  |
+| 28     | def      | It helps us to define functions                                                                                                                              |
+| 29     | as       | This is used to create an alternative                                                                                                                        |
+| 30     | break    | This is used to terminate the loop                                                                                                                           |
+| 31     | while    | This keyword is used to create a while loop                                                                                                                  |
+| 32     | for      | This is created for a loop                                                                                                                                   |
+| 33     | else     | Else is used with if and elif conditional statement the else block is executed if the given condition is not true                                            |
+
+The list of reserved keywords in the Python release can be extracted in this way:
+
+```python
+import keyword
+print(keyword.kwlist)
+```
+
+**and, or, not**
+
+`and`, `or`, `not` are called logical operators in Python, `and` returns `True` only if both operators are `True`, `or` returns if any of the operators is `True`, and `not` is mainly used to invert the truth value. Some examples are shown below:
+
+```python
+>>> True and False
+False
+>>> True or False
+True
+>>> not False
+True
+```
+
+Examples for the `if`, `elif`, and `else`:
+
+```python
+def if_sample(a):
+    if a == 1:
+        print('One')
+    elif a == 2:
+        print('Two')
+    else:
+        print('Something else')
+
+if_sample(2)
+if_sample(4)
+if_sample(1)
+```
+
+The output of the above function is:
+
+```shell
+Two
+Something else
+One
+```
+
+`except`, `raise`, `try` are used with exceptions in Python, exceptions are raised with the `raise`, and `try...except` are used to catch the exceptions:
+
+```python
+def samplefunction(number):
+    try:
+        r = 1/number
+    except:
+        print('Exception caught')
+        return
+    return r
+
+print(reciprocal(100))
+print(reciprocal(0))
+```
+
+The output of the above function is:
+
+```shell
+0.01
+Exception caught
+None
+```
+
+`for` is used for looping. As a general rule, it is better to use when we know the number of times we want to loop. On the other hand, `while` is used for looping, the statements inside a while loop continue to execute until the condition for the while loop evaluates to `False` or a `break` statement is encountered:
+
+```python
+#for
+names = ['Adam','Daniel','Joe','Biden']
+for i in names:
+    print('Hi'+i)
+```
+
+```python
+#while
+i = 100
+while(i):
+    print(i)
+    i = i – 1
+```
+
+**Python identifiers**
+
+An identifier is a name given to entities like class, functions, variables, etc. It helps to differentiate one entity from another so there is no clash in naming conventions. There are some general rules to follow when writing identifiers such as:
+
+- identifiers may be a combination of letters in lowercase (a to z) or uppercase (A to Z) or digits (0 to 9) or an underscore \_. Names like sampleClass, var_one and print_this_to_screen, all are valid identifiers.
+- an identifier cannot start with a number. 1variable is not correct, but variable1 is the correct naming for the variable.
+- please make sure not to use keywords as identifiers at all, this will throw an error.
+- special characters cannot be used as identifiers as well, such as `!, @, #, $, %`.
+- identifier can be of any length, there is no general limitation.
+
+```python
+global = 1
+```
+
+Output:
+
+```shell
+  File "<interactive input>", line 1
+    global = 1
+           ^
+SyntaxError: invalid syntax
+```
+
+Python is a case-sensitive language. This means, `Variable` and `variable` are not the same thing. Please pay an attention to these details. It is always better to give an identifier that makes sense and is easier to read and understand. For example, if you are writing a code and you need an identifier for the count, it is not a good case to write `comte=100`, write `count=100` instead.
+It is a good practice to separate the multiple words with an underscore, for example, `bloomberg_price_match`.
+
+**Python statement, indentation, and comments**
+
+Python statements are instructions that a Python interpreter can execute and run. For instance, `b = 1` is an assignment statement, `if` statement, `for` statement, `while` statement, etc. are other types of statements that will be covered in my blog later. Multi-line statements can be used when there is a break at the end of the statement in Python.
+
+```python
+numbers = 1 + 2 + 3 + \
+    4 + 5 + 6 + \
+    7 + 8 + 9
+```
+
+Above example is called an explicit line continuation. However, line continuation is hinted at inside parentheses `( )`, brackets `[ ]`, and braces `{ }`. For example, above multi-line statement can described as below as well:
+
+```python
+numbers = (1 + 2 + 3 +
+    4 + 5 + 6 +
+    7 + 8 + 9)
+```
+
+Python indentation uses indentation to define the blocks of codes, however, as you probably saw somewhere that other programming languages use `{}` to define blocks. A code block (body of a function, loop, arguments, etc.) starts with indentation and ends with the first unindented line. The amount of indentation depends on you, but it must be consistent throughout that block, otherwise, there will be an error. The enforcement of indentation in Python makes the code look neat and clean.
+If you see an error of incorrect indentation such as `IndentationError`, it means it is better to indent the code. You can use the [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) package that I use in the text editor [VS Code](https://code.visualstudio.com/).
+
+**Python comments**
+
+When it comes to writing codes, commenting is very important. Comments will help others to describe what is going on inside an app so that a person looking at the source code does not have a hard time figuring it out. Sometimes it happens a lot that, a person who is writing the code might forget the details of the blocks in a year and the block of some codes need to be changed and there are no comments provided by the developer inside the code, imagine how hard would it be to understand what is going on?.
+In Python, the `the hash (#)` symbol is used to start writing a comment. Multi-line comments can be implemented by using `the hash (#)` symbol at the beginning of each line or using triple quotes `triple quotes, either ''' or """`.
+
+```python
+#This is a sample comment
+#print out Hello below
+print('Hello')
+```
+
+**Python variables**
+
+A variable is titled or given name location used to store data in the memory. It is very helpful to think of variables as a container that holds data that can be changed later for another use in the app.
+For example, `reference_number=123456`, here the variable name is `reference_number` and the `123456` value is assigned to the variable. Imagine the variable as a big book shop, where you can change the books anytime on the shelves. As you can see, you can use the assignment operator `=` to assign a value to a variable.
+
+```python
+url_destination = "www.google.com"
+print(url_destination)
+
+#assigning multiple values to multiple variables
+a, b, c = 5, 3.2, "Hello"
+
+print (a)
+print (b)
+print (c)
+
+#assigning the same value to multiple variables
+x = y = z = "the same variable"
+
+print (x)
+print (y)
+print (z)
+```
+
+> Python is a type-inferred language, there is no need to explicitly define the variable type. It automatically knows that www.google.com is a string and declares the website variable as a string.
+
+On the contrary, `constants` are the type of variable whose value cannot be changed later. Constants are usually declared and assigned in a module as a way of best practices.
+
+Create a constant.py:
+
+```python
+google_website="www.google.com"
+pi_value=3.14
+```
+
+Create a main.py:
+
+```python
+import constant
+
+print(constant.google_website)
+print(constant.pi_value)
+```
+
+**Literals**
+
+Literals are the raw data that is given to variables or constants while coding. In Python, there are various types of literal such as:
+
+- String literals
+- Numeric literals
+- Boolean literals
+- Literal Collections
+- Special literals
+
+A string literal can be made by writing a text (a group of Characters) surrounded by the single(”), double(“”), or triple quotes. With the help of triple quotes, we can write multi-line strings or show them in the way we wanted.
+
+```python
+# string literals
+
+# in single quote
+single_quote = 'hello world'
+
+# in double quotes
+double_quote = "hi there"
+
+# multi-line String
+multi_line = '''Hi
+           there
+               all'''
+
+print(single_quote)
+print(double_quote)
+print(multi_line)
+```
+
+A character literal is also a type of string literal where a single character is surrounded by single or double quotes.
+
+```python
+# character literal in single quote
+character_single_quote = 'n'
+
+# character literal in double quotes
+character_double_quote = "a"
+
+print(character_single_quote)
+print(character_double_quote)
+```
+
+Numeric Literals are immutable (unchangeable). Numeric literals can belong to 3 different numerical types:
+
+- Integer
+- Float
+- Complex
+
+`Integer` - can be positive and negative numbers including 0. There should not be any fractional part.
+`Float` - are real numbers having both integer and fractional parts.
+`Complex` - are numbers in the form of a + bj, where ‘a‘ is the real part and ‘b‘ is the complex part.
+
+```python
+binary_literal = 0b1010 #Binary Literals
+decimal_literal = 100 #Decimal Literal
+octal_literal = 0o310 #Octal Literal
+hex_literal = 0x12c #Hexadecimal Literal
+
+#Float Literal
+float_1 = 10.5
+float_2 = 1.5e2
+
+#Complex Literal
+complex_literal = 3.14j
+
+print(binary_literal, decimal_literal, octal_literal, hex_literal)
+print(float_1, float_2)
+print(complex_literal)
+```
+
+`Booleans` - are `True` and `False` and these are only two literals in Python.
+
+```python
+a = (1 == True)
+b = (1 == False)
+c = True + 3
+d = False + 7
+
+print("a is", a)
+print("b is", b)
+print("c:", c)
+print("d:", d)
+```
+
+In Python, there are four different literal collections:
+
+- List literals
+- Tuple literals
+- Dict literals
+- Set literals
+
+```python
+cars= ["tesla", "chevrolet", "bmw"] #list
+numbers = (1, 2, 3) #tuple
+alphabets = {'a':'apple', 'b':'ball', 'c':'cat'} #dictionary
+vowels = {'a', 'e', 'i' , 'o', 'u'} #set
+
+print(cars)
+print(numbers)
+print(alphabets)
+print(vowels)
+```
+
+I hope that you enjoyed this post. To learn more about collections, dictionaries, and data types, stay tuned for the next posts 😊.
