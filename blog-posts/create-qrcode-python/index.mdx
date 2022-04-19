@@ -1,0 +1,39 @@
+---
+title: How to generate QR code in 5 lines
+thumbnail: "/assets/images/qrcode.png"
+date: April 28, 2022
+---
+
+QR code is a type of matrix barcode that is a machine-readable optical label that contains information about the item to which it is attached. In practice, QR codes often contain data for a locator, identifier, or tracker that points to a website or application, etc. To create a sample QR code, first of we need to install libraries:
+
+```shell
+#png module
+pip install pypng
+
+#pyqrcode module
+pip install pyqrcode
+```
+
+Once the installation of libraries is finished, we need to import these libraries and proceed to the implementation:
+
+```python
+import pyqrcode
+from pyqrcode import QRCode
+
+#destination of the URL we would like the QR code to be placed
+url_destination='www.bobirrahmatov.tech'
+
+#then creating the QR code to contain the link provided above
+qr_code=QRCode(url_destination)
+
+#this will show the QR code created
+qr_code.show()
+```
+
+Very simple and easy to understand right? If you would like to re use the QR code and print on the sticker, you can save it with the following code:
+
+```python
+qr_code.png('my_qr_code.png', scale=8)
+```
+
+> Note: scale=8 is a parameter that adjusts the size of the QR code to be saved in the form of PNG, and it can be decreased or increased based on your needs.
