@@ -1,0 +1,119 @@
+---
+title: Getting started with Tableau
+thumbnail: "/assets/images/tableau.png"
+date: April 19, 2022
+---
+
+Tableau was invented to empower people to analyze their data regardless of the level of their technical knowledge.
+It was created the big data to make small and more sense. At the backbone of Tableau is VizQL like SQL which is a cutting edge
+visual query language that interprets mouse movements and inputs, for example, drag-and-drop into database queries. This helps
+the user to quickly find insights into their data and to share the results with others without any difficulties. In addition,
+it is not important to know what you are looking for or how you want to present your insights in your data. On the other hand,
+with Tableau, you can dive into the data you are provided. Through visual analysis, you can find explore patterns and relationships
+in your data that you might not have known that they existed in the first place. In this regard, Tableau is fundamentally different
+from other tools, which often require you to know beforehand in what form you want to display your data. Sometimes, other tools require
+you to have technical knowledge before even getting started with the tool. For example, for Power BI, it is unlikely to do anything if
+you do not know about `Data Analysis Expressions (DAX)` or with QlikView `Associated Query Language (AQL)`.
+
+**Tableau application suite**
+
+Tableau application suite overview is below:
+
+**Tableau Prep** - Tableau prep is the latest addition to the Tableau application suite. Tableau Prep changes the way traditional data prep
+is performed in an organization. By providing a visual and direct way to combine, shape, and clean data, Tableau Prep makes it easier for analysts
+and business users to start their analysis, faster. Tableau Prep is comprised of two products: Tableau Prep Builder for building your data flows,
+and Tableau Prep Conductor for scheduling, monitoring, and managing flows across the organization.
+
+![Tableau Prep](/assets/images/blog-posts/tableau-prep.png)
+
+**Tableau Desktop** - Tableau Desktop is an application for both macOS and Windows, that can be used by both analysts and users. In Tableau Desktop,
+you can connect to different data sources, such as Excel, PDF, CSV, AWS, Oracle, Sybase, and other online data sources. With Tableau Desktop, you can
+save your workbooks to your local hard drive or machine. To share the workbooks or dashboards you saved on your machine, you can also use Tableau Desktop to connect
+to the organization's Tableau Server to publish the dashboards so that others can see your dashboards via the URL provided.
+
+![Tableau Prep](/assets/images/blog-posts/tableau-desktop.jpeg)
+
+**Tableau Server** - Tableau Server is a platform for data analysis and is used by small family-run businesses and large Fortune 500 companies alike.
+It is intended for the organization-wide provision of data visualizations and dashboards that can be viewed in a browser and are frequently embedded into the
+organization’s intranet.
+
+![Tableau Server](/assets/images/blog-posts/tableau-server.png)
+
+**Tableau Online** - Tableau Online is your analytics platform fully hosted in the cloud. Publish dashboards and share your discoveries with anyone. Invite colleagues or
+customers to explore hidden opportunities with interactive visualizations and accurate data. All are easily accessible from a browser or on the go with our mobile apps.
+You can get up and running in minutes and seamlessly add users as your needs grow. Tableau Online is a fully hosted solution, so you’ll never have to configure servers,
+manage software upgrades, or scale hardware capacity.
+
+![Tableau Online](/assets/images/blog-posts/tableau-online.gif)
+
+**Tableau Public** - Tableau Public is a hosting service for the publication of data visualizations on the web. It can be viewed by everyone outside the organization.
+It is used by newsrooms and bloggers but also by companies, research institutes, governmental bodies, and non-governmental organizations that aim to get their data stories
+into the public eye. The interactive visualizations can be viewed in the browser directly on the Tableau Public platform, or they can be embedded into blogs and websites.
+
+**Tableau Reader** - Tableau Reader is a free desktop application that you can use to open and interact with data visualizations built in Tableau Desktop. Filter, drill-down and discover.
+However, it is not possible to change the dashboards in Tableau Reader.
+
+![Tableau Reader](/assets/images/blog-posts/tableau-reader.png)
+
+**Data preparation**
+Before starting any analysis, one of the key issues to consider is whether the data is in
+the right format.
+Datasets can be structured in different ways. In most cases, datasets have one of
+two shapes:
+
+- `Wide tables`, with many columns. Often these are summary tables containing aggregated measures (such as pivot tables in Excel). Here, some preprocessing of the data may be necessary.
+- `Long tables`, most of the time without aggregations and with each row containing one data point.
+
+**Visual clues and icons in Tableau desktop**
+
+Tableau provides many visual cues to help you evaluate the type of data that is displayed in the Data pane and the state of a data view.
+
+**Data sources in the Data pane**
+
+The following table explains each of the icons used to describe the type of data sources in the Data pane. Each icon in the table can be modified by one of two indicators.
+
+- A blue checkmark indicates that the data source is the primary data source in the workbook.
+- An orange checkmark indicates that the data source is the secondary data source in the workbook.
+
+![Data Source Clues](/assets/images/blog-posts/data-source-clues.png)
+
+**Fields in the data pane**
+
+The following table explains each of the icons displayed in the Data pane. Each icon in the table can be modified by one of four indicators.
+
+- Blue icons indicate that the field is discrete.
+- Green icons indicate that the field is continuous.
+
+Icons preceded by the equal sign `(=)` indicate that the field is a user-defined calculation or a copy of another field.
+
+![Data Pane Clues](/assets/images/blog-posts/data-pane-clues.png)
+
+**Fields on shelves**
+
+Fields placed on shelves use a combination of icons, colors, and text styles as visual clues:
+
+![Data Pane Clues](/assets/images/blog-posts/shelves-clues.png)
+
+**Fields on the Marks card**
+
+Fields placed on the Marks card use specific icons to describe how they appear in the view.
+
+![Marks Pane Clues](/assets/images/blog-posts/marks-pane-clues.png)
+
+**Tableau workspace**
+
+Once you are connected to the data source, the interface of the Tableau looks like this:
+
+![Tableau Workspace](/assets/images/blog-posts/tableau-workspace.png)
+
+**A. Workbook name** - A workbook contains sheets. A sheet can be a worksheet, a dashboard, or a story.
+**B. Cards and shelves** - Drag fields to the cards and shelves in the workspace to add data to your view.
+**C. Toolbar** - Use the toolbar to access commands and analysis and navigation tools.
+**D. View** - This is the canvas in the workspace where you create a visualization (also referred to as a "viz").
+**E.** - Click this icon to go to the Start page, where you can connect to data.
+**F. SideBar** - In a worksheet, the sidebar area contains the Data pane and the Analytics pane.
+**G.** - Click this tab to go to the Data Source page and view your data.
+**H. Status bar** - Displays information about the current view.
+**I. Sheet tabs** - Tabs represent each sheet in your workbook. This can include worksheets, dashboards, and stories.
+
+I hope you enjoyed this post, please navigate to the next articles to create dashboards or Tableau formulas.
