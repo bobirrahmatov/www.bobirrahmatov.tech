@@ -1,0 +1,60 @@
+---
+title: Installing Node.js with nvm on macOS M1 chip
+thumbnail: "/assets/images/nodejs.png"
+date: April 20, 2022
+---
+
+Installing new applications on macOS new silicon chip (M1 chip) sometimes can be very hard. Node.js can be installed in different ways. I recently had to overcome the issue
+where I needed a different versions of the Node.js which was quite duainting task to install on my new macOS M1 chip MacBook. Using Node Version Manager (NVM) it is possible to
+switch between different Node.js versions on the fly. It also allows testing code with older Node.js versions. The Node Version Manager (NVM) is an open source version manager
+for Node.js (Node). NVM is easy to install and understand, and works on any POSIX-compliant shell (for example, sh or bash). NVM allows you to easily install different versions of
+Node and switch between them on a per-shell basis.
+
+If you have not installed Node.js with Homebrew yet, there is no need to remove the previous versions of the Node.js with NVM. To remove the previous versions of the Node.js with NVM,
+open the terminal window and run:
+
+```shell
+brew uninstall --ignore-dependencies node
+brew uninstall --force node
+```
+
+Once the previous versions are removed, the following code can be run to install the NVM with Homebrew:
+
+```shell
+brew install nvm
+```
+
+After the above command runs and finishes, create a directory for NVM at the home working directory:
+
+```shell
+mkdir ~/.nvm
+```
+
+When using the zsh shell, add the following config inside ~/.zshrc:
+
+```shell
+export NVM_DIR="$HOME/.nvm"
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+```
+
+Whenever the above code finishes running, you can either restart the shell to reload the terminal or execute source `~/.zshrc` to re-load the latest
+`config` for the `zsh shell` from the file. You can run the `nvm ---version` to check the latest version of the NVM installed on your machine to double check.
+
+It is important to check which versions you would like to install via NVM. Node.js is available in two versions:
+
+- Long Term Support (LTS)
+- Current with latest features
+
+I mainly use the current version with latest features but sometimes I need to install LTS version for other purposes. Executing the code on the shell `nvm install node` will install
+current version with latest features automatically. To install the current LTS, the below code should be run:
+
+```shell
+#installing LTS
+nvm install --lts
+
+# nvm install Version-Number (14 should be changed with the version you need)
+nvm install 14
+```
+
+I hope you all enjoyed this article as much as I enjoyed writing it and as always do share the love. Please let me know if you face any issues in installation, I am happy to help 😊.
