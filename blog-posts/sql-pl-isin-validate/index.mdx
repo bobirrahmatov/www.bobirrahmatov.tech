@@ -1,0 +1,85 @@
+---
+title: Validating ISIN and Cusip with SQL PL and Regex
+thumbnail: "/assets/images/mysql.png"
+date: July 7, 2022
+---
+
+An International Securities Identification Number (ISIN) uniquely identifies a security. Its structure is defined in ISO 6166. The ISIN code is a 12-character alphanumeric code that serves for uniform identification of a security through normalization of the assigned National Number, where one exists, at trading and settlement.
+If you are probably working in the field where ISIN is coming in the form of the unstructured data and there is a need to find the ISIN from the given string without rules or mapping. There is an easy way of doing this.
+
+The format of an ISIN is as follows:
+
+┌───────────── a 2-character ISO country code (A-Z)
+│ ┌─────────── a 9-character security code (A-Z, 0-9)
+│ │ ┌── a checksum digit (0-9)
+AU0000XVGZA3
+
+The task of finding the ISIN from the given string is the somehow related to the same task of validating the credit card numbers `Luhn test of credit card numbers`.
+For this task, Regex pattern is used. Short for regular expression, a regex is a string of text that allows you to create patterns that help match, locate, and manage text.
+
+```shell
+//Regex first pattern
+(XS|AD|AE|AF|AG|AI|AL|AM|AO|AQ|AR|AS|AT|AU|AW|AX|AZ|BA|BB|BD|BE|BF|BG|BH|BI|BJ|BL|BM|BN|BO|BQ|BR|BS|BT|BV|BW|BY|BZ|CA|CC|CD|CF|CG|CH|CI|CK|CL|CM|CN|CO|CR|CU|CV|CW|CX|CY|CZ|DE|DJ|DK|DM|DO|DZ|EC|EE|EG|EH|ER|ES|ET|FI|FJ|FK|FM|FO|FR|GA|GB|GD|GE|GF|GG|GH|GI|GL|GM|GN|GP|GQ|GR|GS|GT|GU|GW|GY|HK|HM|HN|HR|HT|HU|ID|IE|IL|IM|IN|IO|IQ|IR|IS|IT|JE|JM|JO|JP|KE|KG|KH|KI|KM|KN|KP|KR|KW|KY|KZ|LA|LB|LC|LI|LK|LR|LS|LT|LU|LV|LY|MA|MC|MD|ME|MF|MG|MH|MK|ML|MM|MN|MO|MP|MQ|MR|MS|MT|MU|MV|MW|MX|MY|MZ|NA|NC|NE|NF|NG|NI|NL|NO|NP|NR|NU|NZ|OM|PA|PE|PF|PG|PH|PK|PL|PM|PN|PR|PS|PT|PW|PY|QA|RE|RO|RS|RU|RW|SA|SB|SC|SD|SE|SG|SH|SI|SJ|SK|SL|SM|SN|SO|SR|SS|ST|SV|SX|SY|SZ|TC|TD|TF|TG|TH|TJ|TK|TL|TM|TN|TO|TR|TT|TV|TW|TZ|UA|UG|UM|US|UY|UZ|VA|VC|VE|VG|VI|VN|VU|WF|WS|YE|YT|ZA|ZM|ZW)([0-9A-Z]{9})([0-9]{1})
+
+//Regex second pattern
+
+```
+
+In order to test this, please click the [Regex first pattern](https://regex101.com/r/vGnpuE/1) or [Regex second pattern](https://regex101.com/r/opgRD0/1) test UI. To use the SQL PL query below, the query need to be compiled:
+
+```shell
+--#SET TERMINATOR @
+
+SET SERVEROUTPUT ON @
+
+CREATE OR REPLACE FUNCTION VERIFY_ISIN (
+  IN IDENTIFIER VARCHAR(12)
+ ) RETURNS SMALLINT
+ -- ) RETURNS BOOLEAN
+ BEGIN
+  DECLARE CHECKSUM_FUNC CHAR(1);
+  DECLARE CONVERTED VARCHAR(24);
+  DECLARE I SMALLINT;
+  DECLARE LENGTH SMALLINT;
+  DECLARE RET SMALLINT DEFAULT 1;
+  --DECLARE RET BOOLEAN DEFAULT FALSE;
+  DECLARE CHAR_AT CHAR(1);
+  DECLARE INVALID_CHAR CONDITION FOR SQLSTATE 'ISIN1';
+
+  SET CHAR_AT = SUBSTR(IDENTIFIER, 1, 1);
+  IF (ASCII(CHAR_AT) < 65 OR 90 < ASCII(CHAR_AT)) THEN
+   SIGNAL INVALID_CHAR SET MESSAGE_TEXT = 'Country code looks wrong';
+  END IF;
+  SET CHAR_AT = SUBSTR(IDENTIFIER, 2, 1);
+  IF (ASCII(CHAR_AT) < 65 OR 90 < ASCII(CHAR_AT)) THEN
+   SIGNAL INVALID_CHAR SET MESSAGE_TEXT = 'Country code looks wrong';
+  END IF;
+
+  -- Convert letters to numbers.
+  SET I = 1;
+  SET CONVERTED = '';
+  SET LENGTH = LENGTH(IDENTIFIER);
+  WHILE (I <= LENGTH) DO
+   SET CHAR_AT = SUBSTR(IDENTIFIER, I, 1);
+   IF (48 <= ASCII(CHAR_AT) AND ASCII(CHAR_AT) <= 57) THEN
+    SET CONVERTED = CONVERTED || CHAR_AT;
+   ELSE
+    SET CONVERTED = CONVERTED || (ASCII(CHAR_AT) - 55);
+   END IF;
+   SET I = I + 1;
+  END WHILE;
+
+  CALL DBMS_OUTPUT.PUT_LINE(CONVERTED);
+
+  -- This function is implemented in Rosetta code.
+  SET CHECKSUM_FUNC = LUHN_TEST(CONVERTED);
+  IF (CHECKSUM_FUNC = 0) THEN
+   SET RET = 0;
+   --SET RET = TRUE;
+  END IF;
+
+  RETURN RET;
+ END @
+```
+
+This function takes a string as input, and checks whether it is a valid ISIN. It is only valid if it has the correct format, and the embedded checksum is correct. Hope this was helpful and you enjoyed reading this post 😊.
