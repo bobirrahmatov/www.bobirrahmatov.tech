@@ -9,10 +9,7 @@ If you are probably working in the field where ISIN is coming in the form of the
 
 The format of an ISIN is as follows:
 
-┌───────────── a 2-character ISO country code (A-Z)
-│ ┌─────────── a 9-character security code (A-Z, 0-9)
-│ │ ┌── a checksum digit (0-9)
-AU0000XVGZA3
+![ISIN Format](/assets/images/blog-posts/isinformat.png)
 
 The task of finding the ISIN from the given string is the somehow related to the same task of validating the credit card numbers `Luhn test of credit card numbers`.
 For this task, Regex pattern is used. Short for regular expression, a regex is a string of text that allows you to create patterns that help match, locate, and manage text.
@@ -22,10 +19,12 @@ For this task, Regex pattern is used. Short for regular expression, a regex is a
 (XS|AD|AE|AF|AG|AI|AL|AM|AO|AQ|AR|AS|AT|AU|AW|AX|AZ|BA|BB|BD|BE|BF|BG|BH|BI|BJ|BL|BM|BN|BO|BQ|BR|BS|BT|BV|BW|BY|BZ|CA|CC|CD|CF|CG|CH|CI|CK|CL|CM|CN|CO|CR|CU|CV|CW|CX|CY|CZ|DE|DJ|DK|DM|DO|DZ|EC|EE|EG|EH|ER|ES|ET|FI|FJ|FK|FM|FO|FR|GA|GB|GD|GE|GF|GG|GH|GI|GL|GM|GN|GP|GQ|GR|GS|GT|GU|GW|GY|HK|HM|HN|HR|HT|HU|ID|IE|IL|IM|IN|IO|IQ|IR|IS|IT|JE|JM|JO|JP|KE|KG|KH|KI|KM|KN|KP|KR|KW|KY|KZ|LA|LB|LC|LI|LK|LR|LS|LT|LU|LV|LY|MA|MC|MD|ME|MF|MG|MH|MK|ML|MM|MN|MO|MP|MQ|MR|MS|MT|MU|MV|MW|MX|MY|MZ|NA|NC|NE|NF|NG|NI|NL|NO|NP|NR|NU|NZ|OM|PA|PE|PF|PG|PH|PK|PL|PM|PN|PR|PS|PT|PW|PY|QA|RE|RO|RS|RU|RW|SA|SB|SC|SD|SE|SG|SH|SI|SJ|SK|SL|SM|SN|SO|SR|SS|ST|SV|SX|SY|SZ|TC|TD|TF|TG|TH|TJ|TK|TL|TM|TN|TO|TR|TT|TV|TW|TZ|UA|UG|UM|US|UY|UZ|VA|VC|VE|VG|VI|VN|VU|WF|WS|YE|YT|ZA|ZM|ZW)([0-9A-Z]{9})([0-9]{1})
 
 //Regex second pattern
-
+([a-zA-Z]{2})((?![a-zA-Z]{10}\b)[a-zA-Z0-9]{9})([0-9])
 ```
 
 In order to test this, please click the [Regex first pattern](https://regex101.com/r/vGnpuE/1) or [Regex second pattern](https://regex101.com/r/opgRD0/1) test UI. To use the SQL PL query below, the query need to be compiled:
+
+This function takes a string as input, and checks whether it is a valid ISIN. It is only valid if it has the correct format, and the embedded checksum is correct.
 
 ```shell
 --#SET TERMINATOR @
@@ -82,4 +81,53 @@ CREATE OR REPLACE FUNCTION VERIFY_ISIN (
  END @
 ```
 
-This function takes a string as input, and checks whether it is a valid ISIN. It is only valid if it has the correct format, and the embedded checksum is correct. Hope this was helpful and you enjoyed reading this post 😊.
+On the other hand, CUSIP is basically derived from an ISIN format too. A CUSIP is a 9-character alphanumeric code that identifies a North American financial security for the purposes of facilitating clearing and settlement of trades.
+The CUSIP was adopted as an American National Standard under Accredited Standards X9.6. In short, CUSIP is derived by dropping the first two characters and the last character of the ISIN.
+
+```Python
+#this code checks the CUSIP
+
+import math
+
+def cusip_check(cusip):
+    if len(cusip) != 9:
+        raise ValueError('CUSIP must be 9 characters')
+
+    cusip = cusip.upper()
+    total = 0
+    for i in range(8):
+        c = cusip[i]
+        if c.isdigit():
+            v = int(c)
+        elif c.isalpha():
+            p = ord(c) - ord('A') + 1
+            v = p + 9
+        elif c == '*':
+            v = 36
+        elif c == '@':
+            v = 37
+        elif c == '#':
+            v = 38
+
+        if i % 2 != 0:
+            v *= 2
+
+        total += int(v / 10) + v % 10
+    check = (10 - (total % 10)) % 10
+    return str(check) == cusip[-1]
+
+if __name__ == '__main__':
+    codes = [
+            '037822100',
+            '17223R102',
+            '38259P508',
+            '594918104',
+            '68389X106',
+            '68389X105'
+            ]
+    for code in codes:
+        print(f'{code} -> {cusip_check(code)}')
+
+```
+
+Hope this was helpful and you enjoyed reading this post 😊.
