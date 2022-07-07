@@ -1,0 +1,189 @@
+---
+title: How to upgrade the Selenium driver for Chrome or Edge browsers?
+thumbnail: "/assets/images/access.png"
+date: July 5, 2022
+---
+
+Selenium is a suite of tools for automating web browsers. In other words, Selenium automates browsers. That's it!
+What you do with that power is entirely up to you. Primarily it is for automating web applications for testing purposes, but is certainly not limited to just that. Boring web-based administration tasks can (and should) also be automated as well.
+
+If you want to automate some projects with Selenium on Chrome or Edge browsers with Python, .NET, VBA or C# updating the latest driver manually can be very daunting task. Therefore, the below sample of the code (class module) checks the latest version of the Selenium package installed and version of the browser and it downloads the matching version of the driver with API release notes.
+
+Please make sure to enable the below libraries, and note there is no need for Selenium Type Library as I am using the `late binding Object` method that will remove the need of installing or checking each user's current settings.
+
+![VBA libraries](/assets/images/blog-posts/vbareferences.png)
+
+Now create a class module and paste code below. Feel free to change the code for your needs.
+
+![VBA libraries](/assets/images/blog-posts/seleniumclass.png)
+
+The code to be pasted to the class module:
+
+```shell
+Option Explicit
+
+Private ChromeDriver As Object
+Private EdgeDriver  As Object
+Private SeleniumFolder As String
+Private TempZipFile As String
+Private ChromeInit  As Boolean, EdgeInit As Boolean
+
+Public Enum dType
+    Chrome
+    Edge
+End Enum
+
+Public Property Get SeleniumFolderPath() As String
+    SeleniumFolderPath = SeleniumFolder
+End Property
+
+Public Property Let SeleniumFolderPath(ByVal FolderPath As String)
+    SeleniumFolder = FolderPath
+End Property
+
+Public Sub UpdateDriver(ByVal DriverType As dType)
+
+    Dim URLPath     As String
+    Dim DriverVer   As String
+    Dim ChromeVer   As String
+    Dim Doc         As New HTMLDocument
+
+    ChromeVer = CreateObject("WScript.Shell").RegRead("HKEY_CURRENT_USER\Software\Google\Chrome\BLBeacon\version")
+    ChromeVer = Trim(Left(ChromeVer, Len(ChromeVer) - 3))
+
+    Select Case DriverType
+        Case dType.Chrome
+            URLPath = "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_" & ChromeVer
+        Case dType.Edge
+            URLPath = "https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/"
+    End Select
+
+    With New MSXML2.XMLHTTP60
+        .Open "GET", URLPath
+        .send
+        DriverVer = .responseText
+    End With
+
+    DownloadUpdatedDriver DriverVer, DriverType
+    ExtractZipAndCopy DriverType
+
+End Sub
+
+Private Sub InitializeDriver(ByVal DriverType As dType)
+    Select Case DriverType
+        Case dType.Chrome
+            Set ChromeDriver = CreateObject("Selenium.ChromeDriver")
+            ChromeDriver.Start
+            ChromeInit = TRUE
+        Case dType.Edge
+            Set EdgeDriver = CreateObject("Selenium.EdgeDriver")
+            EdgeDriver.Start
+            EdgeInit = TRUE
+    End Select
+End Sub
+
+Private Function getCurrentVersion(Doc As HTMLDocument, DriverType As dType) As String
+
+    Dim div         As HTMLDivElement
+
+    Select Case DriverType
+        Case dType.Chrome
+            For Each div In Doc.getElementsByTagName("p")
+                If div.innerText Like "Latest stable release*" Then
+                    With New VBScript_RegExp_55.RegExp
+                        .Pattern = "ChromeDriver\s([\d\.]+)\b"
+                        getCurrentVersion = .Execute(div.innerText)(0).SubMatches(0)
+                        Exit Function
+                    End With
+                End If
+            Next
+        Case dType.Edge
+            With New VBScript_RegExp_55.RegExp
+                .Pattern = "Version:\s([\d\.]+)"
+                For Each div In Doc.getElementsByClassName("module")(0).getElementsByTagName("p")
+                    If .test(div.innerText) Then
+                        getCurrentVersion = .Execute(div.innerText)(0).SubMatches(0)
+                        Exit Function
+                    End If
+                Next
+            End With
+    End Select
+
+End Function
+
+Private Sub DownloadUpdatedDriver(ByVal CurrVersion As String, DriverType As dType)
+
+    Dim URLPath     As String
+    Dim FileStream  As New ADODB.Stream
+
+    Select Case DriverType
+        Case dType.Chrome
+            URLPath = "https://chromedriver.storage.googleapis.com/" & CurrVersion & "/chromedriver_win32.zip"
+        Case dType.Edge
+            Kill Environ$("LocalAppData") & "\SeleniumBasic\Driver_Notes\*.*"
+            URLPath = "https://msedgedriver.azureedge.net/" & CurrVersion & "/edgedriver_win64.zip"
+    End Select
+
+    With New MSXML2.XMLHTTP60
+        .Open "GET", URLPath
+        .send
+        FileStream.Open
+        FileStream.Type = adTypeBinary
+        FileStream.Write .responseBody
+        FileStream.SaveToFile TempZipFile, adSaveCreateOverWrite
+        FileStream.Close
+    End With
+
+End Sub
+
+Private Sub ExtractZipAndCopy(ByVal DriverType As dType)
+
+    Dim FileName    As String
+    Dim FSO         As Object
+    Dim DriverFound As Boolean
+    Dim oShell      As New shell
+
+    Select Case DriverType
+        Case dType.Chrome: FileName = "\chromedriver.exe"
+        Case dType.Edge: FileName = "\edgedriver.exe"
+    End Select
+
+    Set FSO = CreateObject("Scripting.FileSystemObject")
+    If (FSO.FileExists(SeleniumFolder & FileName)) Then
+        Kill SeleniumFolder & FileName
+        DriverFound = FALSE
+        While DriverFound = FALSE
+            If (Not FSO.FileExists(SeleniumFolder & FileName)) Then
+                DriverFound = TRUE
+                Sleep 1000
+            End If
+        Wend
+    End If
+
+    oShell.Namespace(SeleniumFolder).CopyHereoShell.Namespace(TempZipFile).Items
+    If DriverType = dType.Edge Then
+        Name SeleniumFolder & "msedgedriver.exe" As SeleniumFolder & "edgedriver. exe"
+    End If
+    DriverFound = FALSE
+    While DriverFound = FALSE
+        If (FSO.FileExists(SeleniumFolder & FileName)) Then
+            DriverFound = TRUE
+            Sleep 1000
+        End If
+    Wend
+    Set FSO = Nothing
+
+    Kill TempZipFile
+
+End Sub
+
+Private Sub Class_Initialize()
+
+    SeleniumFolder = Environ$("LocalAppData") & "\SeleniumBasic\"
+    TempZipFile = Environ$("LocalAppData") & "\Temp\WebDriver.zip"
+
+End Sub
+
+```
+
+Let me know if you have some difficulties or questions.
