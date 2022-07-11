@@ -9,8 +9,9 @@ The structure of an ISIN is composed of three components:
 - A two-letter country code
 - A nine-character alphanumeric security identifier
 - A single check digit.
-  The check digit is used to help ensure the authenticity of the ISIN. But how is it calculated?
-  The basic idea is to establish a numerical value for every capital letter in the alphabet. Here is a table with the official conversions:
+
+The check digit is used to help ensure the authenticity of the ISIN. But how is it calculated?
+The basic idea is to establish a numerical value for every capital letter in the alphabet. Here is a table with the official conversions:
 
 Software Engineers will recognize these numbers: they are equal to the ASCII code for each capital letter minus 55. For instance, the ASCII code for 'A' is 65, 'B' is 66, and so forth. According to the ISIN.org, the algorithm should follow the below calculations:
 
@@ -25,13 +26,26 @@ Based on the above algorithm wording, these can be coded in the below way for Py
 
 ```python
 #this algoritm checks and sum validates the ISIN based on the structure and numbers, this can be cross checked with the proper isin_string
-
 def isin_check_sum_validate(isin_string):
-    if len(isin_string) != 12 or not all(check_string.isalpha() for check_string in isin_string[:2]) or not all(check_string.isalnum() for check_string in isin_string[2:]):
+    if (
+        len(isin_string) != 12
+        or not all(check_string.isalpha() for check_string in isin_string[:2])
+        or not all(check_string.isalnum() for check_string in isin_string[2:])
+    ):
         return False
     string_full = "".join(str(int(check_string, 36)) for check_string in isin_string)
-    return 0 == (sum(sum(divmod(2 * (ord(check_string) - 48), 10)) for check_string in string_full[-2::-2]) +
-                 sum(ord(check_string) - 48 for check_string in string_full[::-2])) % 10
+    return (
+        0
+        == (
+            sum(
+                sum(divmod(2 * (ord(check_string) - 48), 10))
+                for check_string in string_full[-2::-2]
+            )
+            + sum(ord(check_string) - 48 for check_string in string_full[::-2])
+        )
+        % 10
+    )
+
 
 def isin_check_alt(isin_string):
     if len(isin_string) != 12:
@@ -54,8 +68,21 @@ def isin_check_alt(isin_string):
         sum_of_all += sum_counter - 9 if sum_counter > 9 else sum_counter
     return sum_of_all % 10 == 0
 
-print ([isin_check_sum_validate(string_full) for string_full in ["ES0109067019", "GB0002374006", "HK0941009539", "US037833100G",
-                         "CNE1000007Q1", "XA0109067019", "ES0109067019"]])
+
+print(
+    [
+        isin_check_sum_validate(string_full)
+        for string_full in [
+            "ES0109067019",
+            "GB0002374006",
+            "HK0941009539",
+            "US037833100G",
+            "CNE1000007Q1",
+            "XA0109067019",
+            "ES0109067019",
+        ]
+    ]
+)
 ```
 
 I hope this was helpful and if you need any help or have any questions, please contact me.
