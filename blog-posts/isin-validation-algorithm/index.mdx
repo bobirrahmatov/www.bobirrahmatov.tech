@@ -1,0 +1,61 @@
+---
+title: ISIN validation algorithm
+thumbnail: "/assets/images/python.png"
+date: July 10, 2022
+---
+
+The structure of an ISIN is composed of three components:
+
+- A two-letter country code
+- A nine-character alphanumeric security identifier
+- A single check digit.
+  The check digit is used to help ensure the authenticity of the ISIN. But how is it calculated?
+  The basic idea is to establish a numerical value for every capital letter in the alphabet. Here is a table with the official conversions:
+
+Software Engineers will recognize these numbers: they are equal to the ASCII code for each capital letter minus 55. For instance, the ASCII code for 'A' is 65, 'B' is 66, and so forth. According to the ISIN.org, the algorithm should follow the below calculations:
+
+- Convert any alphabetic letters to their numeric equivalents using the above table.
+- Beginning with the least significant digit (on the right), multiply every other digit by 2.
+- Add up the resulting digits, calling the result SUM.
+- Find the smallest number ending with a zero that is greater than or equal to SUM, and call it VALUE.
+- Subtract SUM from VALUE, giving the check digit.
+- The technical term for the check digit is the ten's complement of the sum modulo 10. In English, this means the resulting sum, including the check digit, is a multiple of 10.
+
+Based on the above algorithm wording, these can be coded in the below way for Python or any other programming language.
+
+```python
+#this algoritm checks and sum validates the ISIN based on the structure and numbers, this can be cross checked with the proper isin_string
+
+def isin_check_sum_validate(isin_string):
+    if len(isin_string) != 12 or not all(check_string.isalpha() for check_string in isin_string[:2]) or not all(check_string.isalnum() for check_string in isin_string[2:]):
+        return False
+    string_full = "".join(str(int(check_string, 36)) for check_string in isin_string)
+    return 0 == (sum(sum(divmod(2 * (ord(check_string) - 48), 10)) for check_string in string_full[-2::-2]) +
+                 sum(ord(check_string) - 48 for check_string in string_full[::-2])) % 10
+
+def isin_check_alt(isin_string):
+    if len(isin_string) != 12:
+        return False
+    string_full = []
+    for counter, check_string in enumerate(isin_string):
+        if check_string.isdigit():
+            if counter < 2:
+                return False
+            string_full.append(ord(check_string) - 48)
+        elif check_string.isupper():
+            if counter == 11:
+                return False
+            string_full += divmod(ord(check_string) - 55, 10)
+        else:
+            return False
+    sum_of_all = sum(string_full[::-2])
+    for sum_counter in string_full[-2::-2]:
+        sum_counter = 2 * sum_counter
+        sum_of_all += sum_counter - 9 if sum_counter > 9 else sum_counter
+    return sum_of_all % 10 == 0
+
+print ([isin_check_sum_validate(string_full) for string_full in ["ES0109067019", "GB0002374006", "HK0941009539", "US037833100G",
+                         "CNE1000007Q1", "XA0109067019", "ES0109067019"]])
+```
+
+I hope this was helpful and if you need any help or have any questions, please contact me.
