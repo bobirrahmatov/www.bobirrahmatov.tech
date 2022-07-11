@@ -6,7 +6,7 @@ date: July 10, 2022
 
 The structure of an ISIN is composed of three components:
 
-- A two-letter country code
+- Alpha-2 code of the country (2 letter code)
 - A nine-character alphanumeric security identifier
 - A single check digit.
 
@@ -25,7 +25,9 @@ Software Engineers will recognize these numbers: they are equal to the ASCII cod
 Based on the above algorithm wording, these can be coded in the below way for Python or any other programming language.
 
 ```python
-#this algoritm checks and sum validates the ISIN based on the structure and numbers, this can be cross checked with the proper isin_string
+#this algoritm checks and sum validates the ISIN based on
+#the structure and numbers, this can be cross checked with
+#the proper isin_string
 def isin_check_sum_validate(isin_string):
     if (
         len(isin_string) != 12
